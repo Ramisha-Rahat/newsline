@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:newsline/shared/constants/app_colors.dart';
 import 'package:newsline/widgets/buttons/cutsom_button.dart';
+import '../../../shared/utils/responsive_utils.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -11,141 +11,156 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-  //final ThemeController controller = Get.find();
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      // appBar: AppBar(
-      //    actions: [
-      //     Obx(()=> Switch(value: controller.isDarkMode.value, onChanged: (val)=>
-      //       controller.toggleTheme(),
-      //     ),
-      //     ),
-      //    ],
-      //
-      // ),
       body: Center(
-       child: Column(children:[
-        Image.asset(
-          'assets/images/logo.png',
-          height: 200,
-        ),
-        const SizedBox(height: 20,),
-        Text('NEWSLINE',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Logo
+              Image.asset(
+                'assets/images/logo.png',
+                height: Responsive.height(25), // 25% of screen height
+              ),
+              SizedBox(height: Responsive.height(2)),
+
+              // Title
+              Text(
+                'NEWSLINE',
+                style: textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: Responsive.fontSize(7), // 7% of width
+                  color: colorScheme.onBackground,
+                ),
+              ),
+              SizedBox(height: Responsive.height(2)),
+
+              // Subtitle
+              Text(
+                'Welcome, Let’s dive into your account',
+                style: textTheme.bodyLarge?.copyWith(
+                  fontSize: Responsive.fontSize(4),
+                  color: colorScheme.onBackground.withOpacity(0.7),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: Responsive.height(6)),
+
+              // Google Button
+              SizedBox(
+                height: Responsive.height(7),
+                width: Responsive.width(90),
+                child: CustomTextButton(
+                  onPressed: () {},
+                  foregroundColor: colorScheme.onSurface,
+                  backgroundColor: colorScheme.surface,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/google-color-svgrepo-com.svg',
+                        height: Responsive.height(4),
+                      ),
+                      SizedBox(width: Responsive.width(3)),
+                      Text(
+                        'Continue With Google',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: Responsive.fontSize(4),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: Responsive.height(2)),
+
+
+              SizedBox(
+                height: Responsive.height(7),
+                width: Responsive.width(90),
+                child: CustomTextButton(
+                  onPressed: () {},
+                  foregroundColor: colorScheme.onSurface,
+                  backgroundColor: colorScheme.surface,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/facebook-color-svgrepo-com.svg',
+                        height: Responsive.height(4),
+                      ),
+                      SizedBox(width: Responsive.width(3)),
+                      Text(
+                        'Continue With Facebook',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: Responsive.fontSize(4),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(height: Responsive.height(20)),
+
+              // Sign In Button
+              SizedBox(
+                height: Responsive.height(7),
+                width: Responsive.width(90),
+                child: CustomTextButton(
+                  onPressed: () {
+                    Get.toNamed('/signIn');
+                  },
+                  foregroundColor: colorScheme.onPrimary,
+                  backgroundColor: colorScheme.primary,
+                  borderColor: Colors.transparent,
+                  child: Center(
+                    child: Text(
+                      'Sign In With Password',
+                      style: textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: Responsive.fontSize(4),
+                        color: Colors.white
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: Responsive.height(6)),
+
+              // Sign Up link
+              RichText(
+                text: TextSpan(
+                  text: "Don't have an Account? ",
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontSize: Responsive.fontSize(3.5),
+                    color: colorScheme.onBackground.withOpacity(0.8),
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Sign Up',
+                      style: textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: Responsive.fontSize(3.5),
+                        color: colorScheme.primary,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.toNamed('/signUp');
+                        },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 20,),
-        Text(
-          'Welcome, Let`s dive into your account',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.grey[700],
-        ),
-        ),
-        const SizedBox(height: 50,),
-        
-        SizedBox(
-          height: 60,
-          width: 350,
-          child: CustomTextButton(
-           onPressed:(){
-
-           },
-            foregroundColor: AppColors.darkBackground,
-             backgroundColor: AppColors.darkText,
-             borderColor: AppColors.black,
-              child: Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/google-color-svgrepo-com.svg', height: 35,),
-                 SizedBox(width: 10,),
-                 Text('Continue With Google', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)
-              ],)
-               ),
-        ),
-         const SizedBox(height: 15,),
-         SizedBox(
-           height: 60,
-           width: 350,
-           child: CustomTextButton(
-               onPressed:(){},
-               foregroundColor: AppColors.darkBackground,
-               backgroundColor: AppColors.darkText,
-               borderColor: AppColors.black,
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   SvgPicture.asset(
-                     'assets/images/apple-173-svgrepo-com.svg', height: 35,),
-                   SizedBox(width: 10,),
-                   Text('Continue With Apple', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)
-                 ],)
-           ),
-         ),
-         const SizedBox(height: 15,),
-         SizedBox(
-           height: 60,
-           width: 350,
-           child: CustomTextButton(
-               onPressed:(){},
-               foregroundColor: AppColors.darkBackground,
-               backgroundColor: AppColors.darkText,
-               borderColor: AppColors.black,
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   SvgPicture.asset(
-                     'assets/images/facebook-color-svgrepo-com.svg', height: 35,),
-                   SizedBox(width: 10,),
-                   Text('Continue With Facebook', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)
-                 ],)
-           ),
-         ),
-
-         const SizedBox(height: 100,),
-
-         SizedBox(
-           height: 60,
-           width: 350,
-           child: CustomTextButton(
-               onPressed:(){
-                 Get.toNamed('/signIn');
-               },
-               foregroundColor: AppColors.white,
-               backgroundColor: AppColors.primary,
-               borderColor: Colors.transparent,
-               child:
-                 Center(child: Text('Sign In With Password', style: TextStyle(fontWeight: FontWeight.bold
-                 , fontSize: 18),))
-               ),
-         ),
-         const SizedBox(height: 50,),
-         RichText(
-           text: TextSpan(
-             text: "Don't have an Account ?",
-             style: TextStyle(fontSize: 15, color: AppColors.black),
-             children: [
-               TextSpan(
-                 text: ' Sign Up',
-                 style: TextStyle(
-                   fontWeight: FontWeight.bold,
-                   color: AppColors.primary,
-                 ),
-                 recognizer: TapGestureRecognizer()
-                   ..onTap = () {
-                     Get.toNamed('/signUp');
-                   },
-               ),
-             ],
-           ),
-         )
- 
-
-       ]
-       ),
       ),
     );
   }

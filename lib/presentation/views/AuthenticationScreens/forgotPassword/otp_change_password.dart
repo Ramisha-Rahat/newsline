@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../domain/viewModel/controller/AuthControllers/forgot_password_controller.dart';
 import '../../../../shared/constants/app_colors.dart';
+import '../../../../shared/utils/responsive_utils.dart';
 import '../../../../widgets/buttons/cutsom_button.dart';
 
 class OtpChangePassword extends StatelessWidget {
@@ -12,21 +14,19 @@ OtpChangePassword({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: Responsive.padding(7)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon(Icons.arrow_back, size: 25)],
-                ),
                 const SizedBox(height: 50),
                 Row(
                   children: [
@@ -37,13 +37,13 @@ OtpChangePassword({super.key});
                             text: 'OTP Verification',
                             style: TextStyle(
                               fontSize: 30,
-                              color: Colors.black,
+                              color: colorScheme.onSurface,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextSpan(
                             text: ' 👩‍💻 ',
-                            style: TextStyle(fontSize: 35),
+                            style: TextStyle(fontSize: Responsive.fontSize(6)),
                           ),
                         ],
                       ),
@@ -51,7 +51,7 @@ OtpChangePassword({super.key});
                   ],
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: Responsive.screenHeight * 0.03),
 
                 const SizedBox(
                   width: 350,
@@ -61,7 +61,7 @@ OtpChangePassword({super.key});
                  ),
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: Responsive.screenHeight * 0.05),
 
                 Form(
                   child: Row(
@@ -73,6 +73,9 @@ OtpChangePassword({super.key});
                           maxLength: 1,
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          ],
                           style: TextStyle(fontSize: 24),
                           decoration: InputDecoration(
                             counterText: '',

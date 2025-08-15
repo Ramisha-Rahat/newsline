@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:newsline/shared/Theme/text_theme.dart';
-
 import 'color_scheme.dart';
 
 class AppTheme {
@@ -8,16 +7,25 @@ class AppTheme {
     brightness: Brightness.light,
     colorScheme: AppColorScheme.lightColorScheme,
     textTheme: AppTextTheme.getTextTheme(context),
+    scaffoldBackgroundColor: AppColorScheme.lightColorScheme.background,
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+    ),
     useMaterial3: true,
   );
-
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(
     brightness: Brightness.dark,
     colorScheme: AppColorScheme.darkColorScheme,
     textTheme: AppTextTheme.getTextTheme(context),
     scaffoldBackgroundColor: AppColorScheme.darkColorScheme.background,
-    appBarTheme: const AppBarTheme(elevation: 0),
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+    ),
     useMaterial3: true,
   );
 }

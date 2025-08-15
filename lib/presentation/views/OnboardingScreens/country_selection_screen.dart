@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:newsline/shared/utils/responsive_utils.dart';
 import '../../../domain/viewModel/controller/OnboardingControllers/onboarding_controller.dart';
 
 class CountrySelectionScreen extends StatelessWidget {
@@ -10,9 +10,13 @@ class CountrySelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.symmetric(horizontal: Responsive.padding(7)),
         child: Column(
           children: [
             RichText(
@@ -21,30 +25,30 @@ class CountrySelectionScreen extends StatelessWidget {
                   TextSpan(
                     text: 'Where do you come from?',
                     style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
+                      fontSize: Responsive.fontSize(5),
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TextSpan(text: ' 👩‍💻 ', style: TextStyle(fontSize: 35)),
                 ],
               ),
             ),
             SizedBox(height: 20),
             Text(
               'Select your country of origin. This will help us to make the best recommendations for you.',
+    style:TextStyle(fontSize:Responsive.fontSize(4)),
             ),
             SizedBox(height: 20),
             TextField(
               controller: controller.searchController,
               decoration: InputDecoration(
-                hintText: 'United...',
+                hintText: 'Pakist...',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 filled: true,
-                fillColor: Colors.grey.shade100,
+                fillColor: colorScheme.surface
               ),
             ),
             SizedBox(height: 20),
@@ -65,12 +69,12 @@ class CountrySelectionScreen extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              backgroundColor: Colors.grey[100],
+                              backgroundColor: colorScheme.surface,
                               icon: Icon(Icons.done_outline),
-                              title: Text('You have selected $selectedCountry'),
+                              title: Text('You have selected $selectedCountry', style: TextStyle(color: colorScheme.onSurface),),
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('No'),
+                                  child:Text('No', style: TextStyle(color: colorScheme.onSurface),),
                                   onPressed: () {
                                     Navigator.of(
                                       context,
@@ -78,7 +82,7 @@ class CountrySelectionScreen extends StatelessWidget {
                                   },
                                 ),
                                 TextButton(
-                                  child: const Text('Yes'),
+                                  child: Text('Yes',style: TextStyle(color: colorScheme.onSurface)),
                                   onPressed: () {
                                     final onboardingController =
                                         Get.find<OnboardingController>();
@@ -102,7 +106,7 @@ class CountrySelectionScreen extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color:colorScheme.surface,
                           border: Border.all(color: Colors.grey.shade300),
                           borderRadius: BorderRadius.circular(12),
                         ),

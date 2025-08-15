@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:newsline/domain/viewModel/controller/AuthControllers/forgot_password_controller.dart';
+import 'package:newsline/shared/utils/responsive_utils.dart';
 
 import '../../../../shared/constants/app_colors.dart';
 import '../../../../widgets/buttons/cutsom_button.dart';
@@ -12,14 +13,16 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
+            padding: EdgeInsets.symmetric(horizontal: Responsive.padding(7)), child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
@@ -32,13 +35,13 @@ class ForgotPassword extends StatelessWidget {
                             text: 'Reset Your Password',
                             style: TextStyle(
                               fontSize: 25,
-                              color: Colors.black,
+                              color: colorScheme.onSurface,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextSpan(
                             text: ' 👩‍💻 ',
-                            style: TextStyle(fontSize: 35),
+                            style: TextStyle(fontSize: Responsive.fontSize(6)),
                           ),
                         ],
                       ),
@@ -46,7 +49,7 @@ class ForgotPassword extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 30),
+              SizedBox(height: Responsive.screenHeight * 0.02),
 
                 const SizedBox(
                   width: 350,
@@ -56,21 +59,21 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: Responsive.screenHeight * 0.02),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       'Email',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: Responsive.fontSize(6)),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: Responsive.screenHeight * 0.02),
 
                 Form(
-                  key: controller.formKey,
+                 // key: controller.formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -86,6 +89,10 @@ class ForgotPassword extends StatelessWidget {
                           return null;
                         },
                         controller: controller.emailController,
+                        focusNode: controller.emailFocus,
+                        onFieldSubmitted: (_) => FocusScope.of(
+                          context,
+                        ).requestFocus(controller.emailFocus),
                         decoration: InputDecoration(
                           hintText: 'abc@gmail.com',
                           prefixIcon: Icon(Icons.email),
@@ -106,7 +113,7 @@ class ForgotPassword extends StatelessWidget {
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
-                          fillColor: Colors.grey.shade100,
+                          fillColor: colorScheme.surface,
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
                         ),
                       ),
@@ -114,7 +121,7 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 200),
+                SizedBox(height: Responsive.screenHeight * 0.03),
 
                 Divider(color: Colors.grey.shade300, thickness: 1),
 
@@ -125,13 +132,13 @@ class ForgotPassword extends StatelessWidget {
                     width: 350,
                     child: CustomTextButton(
                       onPressed: () {
-                        if (controller.formKey.currentState!.validate()) {
+                        // if (controller.formKey.currentState!.validate()) {
                           controller.sendOtpToEmail();
                           controller.pageController.nextPage(
                             duration: Duration(milliseconds: 300),
                             curve: Curves.easeIn,
                           );
-                        }
+                      //  }
                       },
                       foregroundColor: AppColors.white,
                       backgroundColor: AppColors.primary,

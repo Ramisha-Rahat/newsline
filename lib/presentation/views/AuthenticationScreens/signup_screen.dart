@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:newsline/shared/utils/responsive_utils.dart';
 import 'package:newsline/widgets/buttons/cutsom_button.dart';
-
 import '../../../domain/viewModel/controller/AuthControllers/signUp_controllers.dart';
 import '../../../shared/constants/app_colors.dart';
 
@@ -13,22 +13,30 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final colorScheme = Theme.of(context).colorScheme;
+    
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: Responsive.padding(7)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+             SizedBox(height: Responsive.fontSize(6)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon(Icons.arrow_back, size: 25)],
+                  children: [
+                    IconButton(onPressed: (){
+                      Get.offAllNamed('/home');
+                    },
+                        icon: Icon(Icons.arrow_back, size: 25))
+                    ],
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: Responsive.fontSize(12)),
                 Row(
                   children: [
                     RichText(
@@ -38,13 +46,13 @@ class SignupScreen extends StatelessWidget {
                             text: 'Create Account',
                             style: TextStyle(
                               fontSize: 30,
-                              color: Colors.black,
+                              color: colorScheme.onSurface,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextSpan(
                             text: ' 👩‍💻 ',
-                            style: TextStyle(fontSize: 35),
+                            style: TextStyle(fontSize: Responsive.fontSize(6)),
                           ),
                         ],
                       ),
@@ -52,7 +60,7 @@ class SignupScreen extends StatelessWidget {
                   ],
                 ),
         
-                const SizedBox(height: 30),
+             SizedBox(height:Responsive.height(3) ),
         
                 const SizedBox(
                   width: 350,
@@ -67,13 +75,17 @@ class SignupScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text('Email', style:
+                    TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: Responsive.fontSize(6))
+                    ),
                   ],
                 ),
-                const SizedBox(height: 10),
+              SizedBox(height: Responsive.height(2)),
         
                 Form(
-                  key: controller.formKey,
+          //        key: controller.formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -113,22 +125,22 @@ class SignupScreen extends StatelessWidget {
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
-                          fillColor: Colors.grey.shade100,
+                          fillColor: colorScheme.surface,
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
                         ),
                       ),
         
-                      const SizedBox(height: 10),
+                     SizedBox(height: Responsive.height(2)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
                             'Password',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: Responsive.fontSize(6)),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                       SizedBox(height:Responsive.height(2) ),
         
                       Obx(
                         () => TextFormField(
@@ -175,7 +187,7 @@ class SignupScreen extends StatelessWidget {
                               borderSide: BorderSide.none,
                             ),
                             filled: true,
-                            fillColor: Colors.grey.shade100,
+                            fillColor: colorScheme.surface,
                             contentPadding: EdgeInsets.symmetric(vertical: 20),
                           ),
                         ),
@@ -196,9 +208,10 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                     RichText(
+                      overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                         text: "I agree to all",
-                        style: TextStyle(fontSize: 15, color: AppColors.black),
+                        style: TextStyle(fontSize: Responsive.fontSize(4), color: colorScheme.onSurface),
                         children: [
                           WidgetSpan(child: SizedBox(width: 8)),
                           TextSpan(
@@ -218,7 +231,7 @@ class SignupScreen extends StatelessWidget {
                   ],
                 ),
         
-                const SizedBox(height: 20),
+               SizedBox(height: Responsive.height(3)),
                  
          Divider(
                   color: Colors.grey.shade300,
@@ -228,7 +241,7 @@ class SignupScreen extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: "Already have an Account?",
-                    style: TextStyle(fontSize: 15, color: AppColors.black),
+                    style: TextStyle(fontSize: 15,color: colorScheme.onSurface),
                     children: [
                       TextSpan(
                         text: ' Sign In',
@@ -245,7 +258,7 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
         
-                const SizedBox(height: 100),
+              SizedBox(height:Responsive.height(5)),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: SizedBox(
@@ -253,12 +266,12 @@ class SignupScreen extends StatelessWidget {
                     width: 350,
                     child: CustomTextButton(
                       onPressed: () {
-                        if (controller.formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Your data is been saving')),
-                          );
-                          Get.toNamed('/countrySelectionScreen');
-                        }
+                        // if (controller.formKey.currentState!.validate()) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(content: Text('Your data is been saving')),
+                        //   );
+                          Get.toNamed('/onboardingScreen');
+                      //  }
                       },
                       foregroundColor: AppColors.white,
                       backgroundColor: AppColors.primary,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/gestures.dart';
+import 'package:newsline/shared/utils/responsive_utils.dart';
 import 'package:newsline/widgets/cards/success_card.dart';
 
+import '../../../data/services/api_services.dart';
 import '../../../domain/viewModel/controller/AuthControllers/signIn_controllers.dart';
 import '../../../shared/constants/app_colors.dart';
 import '../../../widgets/buttons/cutsom_button.dart';
@@ -14,22 +16,31 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
- resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: Responsive.padding(7)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                SizedBox(height: Responsive.fontSize(6)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon(Icons.arrow_back, size: 25)],
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.arrow_back, size: 25),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: Responsive.fontSize(12)),
                 Row(
                   children: [
                     RichText(
@@ -39,22 +50,22 @@ class SignInScreen extends StatelessWidget {
                             text: 'Welcome Back',
                             style: TextStyle(
                               fontSize: 35,
-                              color: Colors.black,
+                              color: colorScheme.onSurface,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextSpan(
                             text: ' 👩‍💻 ',
-                            style: TextStyle(fontSize: 35),
+                            style: TextStyle(fontSize: Responsive.fontSize(6)),
                           ),
                         ],
                       ),
                     ),
                   ],
                 ),
-        
-                const SizedBox(height: 30),
-        
+
+                SizedBox(height:Responsive.height(3) ),
+
                 const SizedBox(
                   width: 350,
                   child: Text(
@@ -62,19 +73,25 @@ class SignInScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 17),
                   ),
                 ),
-        
+
                 const SizedBox(height: 30),
-        
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      'Email',
+                      style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: Responsive.fontSize(6))
+
+                      ),
                   ],
                 ),
-                const SizedBox(height: 10),
-        
+                SizedBox(height: Responsive.height(2)),
+
                 Form(
-                  key: controller.formKey,
+                  //     key: controller.formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -114,23 +131,24 @@ class SignInScreen extends StatelessWidget {
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
-                          fillColor: Colors.grey.shade100,
+                          fillColor: colorScheme.surface,
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
                         ),
                       ),
-        
+
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
                             'Password',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: Responsive.fontSize(6)),
+
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
-        
+                      SizedBox(height:Responsive.height(2) ),
+
                       Obx(
                         () => TextFormField(
                           obscureText: controller.isObscureText.value,
@@ -176,7 +194,7 @@ class SignInScreen extends StatelessWidget {
                               borderSide: BorderSide.none,
                             ),
                             filled: true,
-                            fillColor: Colors.grey.shade100,
+                            fillColor: colorScheme.surface,
                             contentPadding: EdgeInsets.symmetric(vertical: 20),
                           ),
                         ),
@@ -184,7 +202,7 @@ class SignInScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-        
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -199,14 +217,14 @@ class SignInScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Text(
+                   Text(
                           'Remember me',
-                          style: TextStyle(fontSize: 15, color: AppColors.black),
+                          style: TextStyle(fontSize: Responsive.fontSize(4), color: colorScheme.onSurface),
                         ),
                       ],
                     ),
                     // SizedBox(width: 70,),
-                     InkWell(
+                    InkWell(
                       onTap: () {
                         Get.toNamed('/resetPasswordOnboardingScreens');
                       },
@@ -218,21 +236,18 @@ class SignInScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                     ),
+                    ),
                   ],
                 ),
-        
+
                 const SizedBox(height: 20),
-         
-         Divider(
-                  color: Colors.grey.shade300,
-                  thickness: 1,
-                ),
-        
+
+                Divider(color: Colors.grey.shade300, thickness: 1),
+
                 RichText(
                   text: TextSpan(
                     text: "Create an Account?",
-                    style: TextStyle(fontSize: 15, color: AppColors.black),
+                    style: TextStyle(fontSize: 15, color:colorScheme.onSurface),
                     children: [
                       TextSpan(
                         text: ' Sign Up',
@@ -242,13 +257,13 @@ class SignInScreen extends StatelessWidget {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Get.toNamed('/home');
+                            Get.toNamed('/signUp');
                           },
                       ),
                     ],
                   ),
                 ),
-        
+
                 const SizedBox(height: 70),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -256,24 +271,50 @@ class SignInScreen extends StatelessWidget {
                     height: 60,
                     width: 350,
                     child: CustomTextButton(
-                      onPressed: () {
-                        
+                      onPressed: () async {
                         if (controller.formKey.currentState!.validate()) {
-                          Get.dialog(
-                            SuccessCard(
-                              title: 'Sign In Successful',
-                              message: 'Please wait we are signing you in.',
-                              image: Image.asset('assets/images/logo.png', height: 40, width: 40),
-                            ),
-                          );
-                          Get.toNamed('/home');
+                          final api = ApiService();
+
+                          String email = controller.emailController.text.trim();
+                          String password = controller.passwordController.text
+                              .trim();
+
+                          // Call FastAPI login
+                          String? token = await api.login(email, password);
+
+                          if (token != null) {
+                            // ✅ Show success
+                            Get.dialog(
+                              SuccessCard(
+                                title: 'Sign In Successful',
+                                message: 'Please wait we are signing you in.',
+                                image: Image.asset(
+                                  'assets/images/logo.png',
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                            );
+
+                            // ✅ Optional: Test the root endpoint
+                            await api.getRoot(token);
+
+                            // ✅ Navigate to home
+                            Get.toNamed('/homePage');
+                          } else {
+                            // ❌ Show error
+                            Get.snackbar(
+                              'Login Failed',
+                              'Invalid email or password.',
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white,
+                            );
+                          }
                         }
                       },
                       foregroundColor: AppColors.white,
                       backgroundColor: AppColors.primary,
-                      child: Text('Sign In',
-                      
-                      ),
+                      child: const Text('Sign In'),
                     ),
                   ),
                 ),

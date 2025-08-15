@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:newsline/presentation/views/OnboardingScreens/finishing_onboarding.dart';
 import 'package:newsline/presentation/views/OnboardingScreens/profile_setup_screen.dart';
 import 'package:newsline/presentation/views/OnboardingScreens/publisher_screen.dart';
+import 'package:newsline/shared/utils/responsive_utils.dart';
 
 import '../../../domain/viewModel/controller/OnboardingControllers/onboarding_controller.dart';
 import '../../../shared/constants/app_colors.dart';
@@ -22,6 +24,7 @@ class OnboardingScreen extends StatelessWidget {
     PublisherScreen(),
     NotificationsScreen(),
     ProfileSetupScreen(),
+    FinishingOnboarding()
   ];
 
 
@@ -29,30 +32,33 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Row(
-            children: [
-              Icon(Icons.arrow_back),
-            SizedBox(width: 50,),
-            Obx(() => SizedBox(
-              width: 250,
-              child: LinearProgressIndicator(
-                  value: controller.progress,
-                  borderRadius: BorderRadius.circular(25),
-                  minHeight: 12,
-                  backgroundColor: Colors.grey[300],
-                  color: AppColors.primary
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: [
+          Row(
+              children: [
+                IconButton(onPressed: (){
+                  Get.back();
+                },
+                    icon: Icon(Icons.arrow_back, size: 25)),
+                SizedBox(width: Responsive.width(2),),
+                Obx(() => SizedBox(
+                  width: Responsive.width(70),
+                  child: LinearProgressIndicator(
+                      value: controller.progress,
+                      borderRadius: BorderRadius.circular(25),
+                      minHeight: 12,
+                      backgroundColor: Colors.grey[300],
+                      color: AppColors.primary
+                  ),
                 ),
-            ),
-            ),
-            ]
-            ),
-            const SizedBox(height: 10),
-            Expanded(
+                ),
+              ]
+          ),
+          const SizedBox(height: 10),
+          Expanded(
               child:
                   PageView.builder(
                     physics: NeverScrollableScrollPhysics(),
@@ -63,9 +69,8 @@ class OnboardingScreen extends StatelessWidget {
                       return screens[index];
                     },
                   )
-              ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

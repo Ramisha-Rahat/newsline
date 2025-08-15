@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../domain/viewModel/controller/AuthControllers/forgot_password_controller.dart';
 import '../../../../shared/constants/app_colors.dart';
+import '../../../../shared/utils/responsive_utils.dart';
 import '../../../../widgets/buttons/cutsom_button.dart';
 import '../../../../widgets/cards/success_card.dart';
 
@@ -13,13 +14,17 @@ class NewPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    final colorScheme = Theme.of(context).colorScheme;
+    
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: Responsive.padding(7)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -33,14 +38,10 @@ class NewPasswordScreen extends StatelessWidget {
                           TextSpan(
                             text: 'Create New Password',
                             style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.black,
+                              fontSize: Responsive.fontSize(6),
                               fontWeight: FontWeight.bold,
+                              color: colorScheme.onSurface
                             ),
-                          ),
-                          TextSpan(
-                            text: ' 👩‍💻 ',
-                            style: TextStyle(fontSize: 35),
                           ),
                         ],
                       ),
@@ -48,7 +49,8 @@ class NewPasswordScreen extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: Responsive.screenHeight * 0.02),
+
 
                 const SizedBox(
                   width: 350,
@@ -58,18 +60,19 @@ class NewPasswordScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: Responsive.screenHeight * 0.04),
+
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('New Password', style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text('New Password', style: TextStyle(fontWeight: FontWeight.bold, color: colorScheme.onSurface, fontSize: Responsive.fontSize(4))),
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: Responsive.screenHeight * 0.01),
 
                 Form(
-                  key: controller.formKey,
+             //     key: controller.formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -97,12 +100,21 @@ class NewPasswordScreen extends StatelessWidget {
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
-                          fillColor: Colors.grey.shade100,
+                          fillColor:colorScheme.surface,
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
                         ),
                       ),
+                      SizedBox(height: Responsive.screenHeight * 0.02),
 
-                      const SizedBox(height: 10),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('Confirm Password', style: TextStyle(fontWeight: FontWeight.bold, color: colorScheme.onSurface, fontSize: Responsive.fontSize(4))),
+                        ],
+                      ),
+                      SizedBox(height: Responsive.screenHeight * 0.01),
+
                       TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.text,
@@ -128,7 +140,7 @@ class NewPasswordScreen extends StatelessWidget {
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
-                          fillColor: Colors.grey.shade100,
+                          fillColor:colorScheme.surface,
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
                         ),
                       ),
@@ -138,7 +150,8 @@ class NewPasswordScreen extends StatelessWidget {
                 ),
 
 
-                const SizedBox(height: 100),
+                SizedBox(height: Responsive.screenHeight * 0.03),
+
 
                 Divider(
                   color: Colors.grey.shade300,
@@ -152,14 +165,14 @@ class NewPasswordScreen extends StatelessWidget {
                     width: 350,
                     child: CustomTextButton(
                       onPressed: () {
-                        if (controller.formKey.currentState!.validate()) {
+                       // if (controller.formKey.currentState!.validate()) {
                           SuccessCard(
                             title: 'Password Reset Successful',
                             message: 'We are updating your password and redirecting you to homepage',
                             image: Image.asset('assets/images/logo.png', height: 40, width: 40,),
                           );
-                          Get.toNamed('/home');
-                        }
+                          Get.toNamed('/signIn');
+                       // }
                       },
                       foregroundColor: AppColors.white,
                       backgroundColor: AppColors.primary,

@@ -4,8 +4,7 @@ class RouteNames {
   static const signUp = '/signUp';
   static const signIn = '/signIn';
   //forgot password screen
-  static const onboardingResetPasswordScreen =
-      '/resetPasswordOnboardingScreens';
+  static const onboardingResetPasswordScreen = '/resetPasswordOnboardingScreens';
   //onboarding profile and all
   static const onBoardingScreen = '/onboardingScreen';
 

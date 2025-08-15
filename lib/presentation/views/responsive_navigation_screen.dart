@@ -14,33 +14,33 @@ class ResponsiveNavigationScreen extends StatelessWidget {
 
   final List<Widget> pages = const [
     HomeScreen(),
-    SearchPage(),
     SavedPage(),
+    SearchPage(),
     ProfilePage()
   ];
 
   final List<BottomNavigationBarItem> navItems = const [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-    BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
     BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Saved"),
+    BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
     BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
   ];
 
 
 
-
   @override
   Widget build(BuildContext context) {
+
+
+    final colorScheme = Theme.of(context).colorScheme;
     return Obx(() {
       return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white,
           body: IndexedStack(
             index: controller.indexedStack.value,
             children: pages,
           ),
           bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.white,
             currentIndex: controller.indexedStack.value,
             onTap: controller.onItemTapped,
             items: navItems,

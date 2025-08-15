@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import '../../../domain/viewModel/controller/OnboardingControllers/onboarding_controller.dart';
 import '../../../shared/constants/app_colors.dart';
+import '../../../shared/utils/responsive_utils.dart';
 import '../../../widgets/buttons/cutsom_button.dart';
 
 class ProfileSetupScreen extends StatelessWidget {
@@ -8,9 +11,10 @@ class ProfileSetupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Responsive.padding(7)),
         child: Column(
           children: [
             RichText(
@@ -19,36 +23,31 @@ class ProfileSetupScreen extends StatelessWidget {
                   TextSpan(
                     text: 'Create Public Profile ',
                     style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
+                      fontSize: Responsive.fontSize(5),
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TextSpan(text: ' 👩‍💻 ', style: TextStyle(fontSize: 35)),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: Responsive.screenHeight * 0.02),
             Text(
               'The profile will be publicly visible to other users. You can change it later.',
+              style: TextStyle(fontSize: Responsive.fontSize(4)),
             ),
-            SizedBox(height: 30),
-            
+            SizedBox(height: Responsive.screenHeight * 0.03),
+
             CircleAvatar(
               radius: 50,
               backgroundColor: Colors.grey[300],
-              child: Icon(
-                Icons.person,
-                size: 50,
-                color: Colors.grey[700],
-              ),
+              child: Icon(Icons.person, size: 50, color: Colors.grey[700]),
             ),
 
-            const SizedBox(height: 20,),
-              
-            Form(child: 
-            
-              Column(
+            const SizedBox(height: 20),
+
+            Form(
+              child: Column(
                 children: [
                   TextFormField(
                     decoration: InputDecoration(
@@ -57,7 +56,7 @@ class ProfileSetupScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       labelText: 'UserName',
                       border: OutlineInputBorder(),
@@ -72,29 +71,35 @@ class ProfileSetupScreen extends StatelessWidget {
                     maxLines: 3,
                   ),
                 ],
-              )
-            ),
-
-            SizedBox(height: 10),
-
-
-            SizedBox(
-              height: 60,
-              width: 350,
-              child: CustomTextButton(
-                onPressed: () {
-
-                },
-                foregroundColor: AppColors.white,
-                backgroundColor: AppColors.primary,
-                borderColor: Colors.transparent,
-                child: const Center(child: Text('Continue')),
               ),
             ),
 
-          ]
+            SizedBox(height: Responsive.screenHeight * 0.01),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(Responsive.padding(7)),
+          child: SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: CustomTextButton(
+              onPressed: () {
+                final onboardingController = Get.find<OnboardingController>();
+                onboardingController.pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.ease,
+                );
+              },
+              foregroundColor: AppColors.white,
+              backgroundColor: AppColors.primary,
+              borderColor: Colors.transparent,
+              child: const Center(child: Text('Continue')),
             ),
-      )
+          ),
+        ),
+      ),
     );
   }
 }
