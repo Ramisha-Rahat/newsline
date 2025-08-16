@@ -7,7 +7,6 @@ class ResponsiveNavigationController extends GetxController {
     indexedStack.value = index;
   }
 
-  // The full list of items to search from
   final items = [
     "Apple",
     "Banana",
@@ -28,10 +27,7 @@ class ResponsiveNavigationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Initialize filteredItems with full list
     filteredItems.value = items;
-
-    // Whenever searchQuery changes, filter the list
     ever(searchQuery, (_) => filterItems());
   }
 

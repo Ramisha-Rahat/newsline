@@ -4,7 +4,6 @@ import 'package:newsline/presentation/views/homePage/homeScreen.dart';
 import 'package:newsline/presentation/views/homePage/profile_page.dart';
 import 'package:newsline/presentation/views/homePage/saved_page.dart';
 import 'package:newsline/presentation/views/homePage/searchPage.dart';
-import 'package:newsline/shared/Theme/color_scheme.dart';
 import '../../domain/viewModel/controller/responsive_navigation_controller.dart';
 
 class ResponsiveNavigationScreen extends StatelessWidget {
@@ -30,8 +29,6 @@ class ResponsiveNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     final colorScheme = Theme.of(context).colorScheme;
     return Obx(() {
       return SafeArea(
@@ -45,7 +42,7 @@ class ResponsiveNavigationScreen extends StatelessWidget {
             onTap: controller.onItemTapped,
             items: navItems,
             type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: TextStyle(color: AppColorScheme.lightColorScheme.primary),
+            selectedLabelStyle: TextStyle(color: colorScheme.primary),
             unselectedLabelStyle: TextStyle(color: Colors.grey),
           ),
         ),
