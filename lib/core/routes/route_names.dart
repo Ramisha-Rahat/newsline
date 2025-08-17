@@ -18,4 +18,6 @@ class RouteNames {
   //editprofilescreen
 
   static const editProfileScreen='/editProfileScreen';
+  static const settingScreen='/settingScreen';
+  static const addBlogPage='/addBlogPage';
 }

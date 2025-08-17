@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newsline/core/routes/routes.dart';
+import 'package:newsline/domain/viewModel/controller/AuthControllers/signIn_controllers.dart';
+import 'package:newsline/domain/viewModel/controller/AuthControllers/signUp_controllers.dart';
+import 'package:newsline/domain/viewModel/controller/HomeScreenControllers/homeScreenControllers.dart';
 import 'package:newsline/shared/Theme/app_theme.dart';
 import 'package:newsline/shared/utils/responsive_utils.dart';
 import 'core/routes/route_names.dart';
 import 'domain/viewModel/controller/ThemeController/theme_controller.dart';
 
 void main() async {
+  Get.put(HomeScreenController());
+  Get.put(SignInController());
+  Get.put(SignUpController());
   runApp(MyApp());
 }
 

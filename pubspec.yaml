@@ -47,7 +47,8 @@ dependencies:
   skeletonizer: ^2.1.0+1
   url_launcher: ^6.3.0
   flutter_native_splash: ^2.4.6
-
+  custom_cached_image: ^1.4.0
+  html_editor_enhanced: ^2.7.1
 
 
 dev_dependencies:

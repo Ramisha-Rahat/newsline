@@ -3,7 +3,9 @@ import 'package:newsline/core/bindings/HomeScreenBindings/profile_bindings.dart'
 import 'package:newsline/core/bindings/responsive_naviagtion_bindings.dart';
 import 'package:newsline/core/routes/route_names.dart';
 import 'package:newsline/presentation/views/SplashScreen/splash_screen.dart';
+import 'package:newsline/presentation/views/profileView/add_blog_page.dart';
 import 'package:newsline/presentation/views/profileView/edit_profile_page.dart';
+import 'package:newsline/presentation/views/profileView/setting_screen.dart';
 import 'package:newsline/presentation/views/responsive_navigation_screen.dart';
 import '../../presentation/views/AuthenticationScreens/forgotPassword/onboarding_forgot_password.dart';
 import '../../presentation/views/AuthenticationScreens/signIn_screen.dart';
@@ -49,7 +51,6 @@ class AppRoutes {
       binding: OnboardingBindings(),
     ),
 
-    ///home page
     GetPage(
       name: RouteNames.homePage,
       page: () => ResponsiveNavigationScreen(),
@@ -60,6 +61,12 @@ class AppRoutes {
 
     GetPage(name: RouteNames.splashScreen, page: () => SplashScreen()),
 
-    GetPage(name: RouteNames.editProfileScreen, page: () => EditProfilePage(), binding: ProfileScreenBindings()),
+    GetPage(
+      name: RouteNames.editProfileScreen,
+      page: () => EditProfilePage(),
+      binding: ProfileScreenBindings(),
+    ),
+    GetPage(name: RouteNames.settingScreen, page: () => SettingScreen()),
+    GetPage(name: RouteNames.addBlogPage, page: () => AddBlogPage()),
   ];
 }

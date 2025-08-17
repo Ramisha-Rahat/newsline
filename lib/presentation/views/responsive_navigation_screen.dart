@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newsline/presentation/views/homePage/homeScreen.dart';
 import 'package:newsline/presentation/views/homePage/profile_page.dart';
-import 'package:newsline/presentation/views/homePage/saved_page.dart';
+import 'package:newsline/presentation/views/homePage/blog_page.dart';
 import 'package:newsline/presentation/views/homePage/searchPage.dart';
 import '../../domain/viewModel/controller/responsive_navigation_controller.dart';
 
@@ -11,16 +11,16 @@ class ResponsiveNavigationScreen extends StatelessWidget {
 
   final ResponsiveNavigationController controller = Get.put(ResponsiveNavigationController());
 
-  final List<Widget> pages = const [
+  final List<Widget> pages = [
     HomeScreen(),
-    SavedPage(),
-    SearchPage(),
-    ProfilePage()
+    const BlogPage(),
+    const SearchPage(),
+    const ProfilePage()
   ];
 
   final List<BottomNavigationBarItem> navItems = const [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-    BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Saved"),
+    BottomNavigationBarItem(icon: Icon(Icons.book), label: "Blog"),
     BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
     BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
   ];

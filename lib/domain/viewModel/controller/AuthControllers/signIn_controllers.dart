@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 class SignInController extends GetxController{
 
-final formKey=GlobalKey<FormState>();
+ final signInformKey=GlobalKey<FormState>();
 
   final emailController=TextEditingController();
   final passwordController=TextEditingController();
