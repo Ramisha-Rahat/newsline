@@ -32,7 +32,6 @@ class HomeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              // 🔹 Top horizontal list
               SizedBox(
                 height: Responsive.height(15),
                 width: double.infinity,
@@ -113,7 +112,6 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: Responsive.screenHeight * 0.05),
 
-              // 🔹 Filter buttons
               SizedBox(
                 height: 50,
                 child: GetBuilder<HomeScreenController>(
@@ -158,7 +156,6 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: Responsive.screenHeight * 0.02),
 
-              // 🔹 Content based on filter
               Expanded(
                 child: GetBuilder<HomeScreenController>(
                   builder: (ctrl) {

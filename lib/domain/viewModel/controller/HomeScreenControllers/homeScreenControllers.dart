@@ -13,11 +13,11 @@ class HomeScreenController extends GetxController {
  void _loadData() async {
   await Future.delayed(const Duration(seconds: 4));
   isLoading = false;
-  update(); // refresh UI
+  update();
  }
 
  void changeFilter(int index) {
   selectedFilter = index;
-  update(); // refresh UI
+  update();
  }
 }
