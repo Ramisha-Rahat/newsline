@@ -8,6 +8,7 @@ import '../../../data/services/login_api_services.dart';
 import '../../../domain/viewModel/controller/AuthControllers/signIn_controllers.dart';
 import '../../../shared/constants/app_colors.dart';
 import '../../../widgets/buttons/cutsom_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends GetView<SignInController> {
   const SignInScreen({super.key});
@@ -263,9 +264,10 @@ class SignInScreen extends GetView<SignInController> {
                           String password = controller.passwordController.text.trim();
 
                           try {
-                            String? token = await api.login(email, password);
-
+                            final token = await api.login(email, password);
                             if (token != null) {
+                              final prefs = await SharedPreferences.getInstance();
+                              await prefs.setString("access_token", token);
                               Get.dialog(
                                 SuccessCard(
                                   title: 'Sign In Successful',

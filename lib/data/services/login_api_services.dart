@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-import '../models/profile_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class ApiService {
-  final String baseUrl = "http://192.168.100.140:8000";
+  final String baseUrl = "http://192.168.101.21:8000";
 
   Future<void> getRoot(String token) async {
     final response = await http.get(
@@ -66,6 +66,28 @@ class ApiService {
       throw Exception(error["detail"] ?? "Unknown error");
     }
 
+  }
+
+
+  Future<String?> refreshToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final refreshToken = prefs.getString("refresh_token");
+
+    final response = await http.post(
+      Uri.parse("$baseUrl/token/refresh"),
+      body: {"refresh_token": refreshToken},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      await prefs.setString("access_token", data["access_token"]);
+      await prefs.setString("refresh_token", data["refresh_token"]);
+      return data["access_token"];
+    } else {
+      await prefs.clear();
+      Get.offAllNamed("/login");
+      return null;
+    }
   }
 
 

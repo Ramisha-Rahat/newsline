@@ -1,31 +1,31 @@
 class Blog {
   final int id;
+  final int authorId;
   final String title;
   final String content;
-  final String author;
-  final String imageUrl;
-  final DateTime date;
-  final bool isDraft;
+  final String? coverImageUrl;
+  final String createdAt;
+  final String updatedAt;
 
   Blog({
     required this.id,
+    required this.authorId,
     required this.title,
     required this.content,
-    required this.author,
-    required this.imageUrl,
-    required this.date,
-    required this.isDraft,
+    this.coverImageUrl,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Blog.fromJson(Map<String, dynamic> json) {
     return Blog(
       id: json['id'],
+      authorId: json['author_id'],
       title: json['title'],
       content: json['content'],
-      author: json['author'],
-      imageUrl: json['image_url'],
-      date: DateTime.parse(json['date']),
-      isDraft: json['is_draft'],
+      coverImageUrl: json['cover_image_url'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
     );
   }
 }

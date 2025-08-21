@@ -13,15 +13,15 @@ class ResponsiveNavigationScreen extends StatelessWidget {
 
   final List<Widget> pages = [
     HomeScreen(),
-    const BlogPage(),
-    const SearchPage(),
-    const ProfilePage()
+    BlogPage(),
+     SearchPage(),
+     ProfilePage()
   ];
 
   final List<BottomNavigationBarItem> navItems = const [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
     BottomNavigationBarItem(icon: Icon(Icons.book), label: "Blog"),
-    BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+    BottomNavigationBarItem(icon: Icon(Icons.notifications), label: "Notifications"),
     BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
   ];
 

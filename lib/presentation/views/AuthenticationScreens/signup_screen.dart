@@ -5,6 +5,7 @@ import 'package:newsline/widgets/buttons/cutsom_button.dart';
 import '../../../data/services/login_api_services.dart';
 import '../../../domain/viewModel/controller/AuthControllers/signUp_controllers.dart';
 import '../../../shared/constants/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../widgets/cards/success_card.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -291,9 +292,10 @@ class SignupScreen extends StatelessWidget {
                               String confirm_password = controller.confirmPasswordController.text.trim();
 
                               try {
-                                String? result = await api.signUp(username, email, password, confirm_password);
-
-                                if (result != null) {
+                                final token = await api.signUp(username, email, password, confirm_password);
+                                if (token != null) {
+                                  final prefs = await SharedPreferences.getInstance();
+                                  await prefs.setString("access_token", token);
                                   Get.dialog(
                                     SuccessCard(
                                       title: 'Sign Up Successful',

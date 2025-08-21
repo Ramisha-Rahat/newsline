@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:newsline/widgets/expand_tile/expand_tile.dart';
 import 'package:newsline/widgets/text_with_toggle/toggle_line.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../shared/utils/responsive_utils.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -74,10 +74,22 @@ class SettingScreen extends StatelessWidget {
                 ),
                 ListTile(
                   title: const Text("Two-Factor Authentication"),
-                  onTap: () {},
+                  onTap: () {
+
+                  },
                 ),
               ],
             ),
+
+            Spacer(),
+            ListTile(
+              leading: Text('Logout', style: TextStyle(fontSize: Responsive.fontSize(4)),),
+              trailing: IconButton( onPressed:() async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.remove("access_token");
+                Get.offAllNamed('/home');
+              }, icon: Icon(Icons.logout, color: colorScheme.error,)),
+            )
 
           ],
         ),

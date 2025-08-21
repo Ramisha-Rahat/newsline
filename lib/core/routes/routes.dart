@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:newsline/core/bindings/HomeScreenBindings/notification_bindings.dart';
 import 'package:newsline/core/bindings/HomeScreenBindings/profile_bindings.dart';
 import 'package:newsline/core/bindings/responsive_naviagtion_bindings.dart';
 import 'package:newsline/core/routes/route_names.dart';
@@ -15,6 +16,7 @@ import '../../presentation/views/OnboardingScreens/OnboardingScreens.dart';
 import '../bindings/AuthenticationBindings/forgot_password_binding.dart';
 import '../bindings/AuthenticationBindings/signIn_bindings.dart';
 import '../bindings/AuthenticationBindings/signUp_bindings.dart';
+import '../bindings/HomeScreenBindings/homeScreenBindings.dart';
 import '../bindings/OnboardingBindings/onboarding_bindings.dart';
 import '../bindings/ThemeBindings/theme_bindings.dart';
 
@@ -54,7 +56,11 @@ class AppRoutes {
     GetPage(
       name: RouteNames.homePage,
       page: () => ResponsiveNavigationScreen(),
-      binding: ResponsiveNavigationBindings(),
+      bindings: [
+        ResponsiveNavigationBindings(),
+        HomeScreenBindings(),
+        NotificationBindings()
+      ],
 
       //  HomeScreenBindings(),
     ),

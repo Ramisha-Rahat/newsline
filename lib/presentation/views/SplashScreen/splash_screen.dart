@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../core/routes/route_names.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,12 +11,23 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
+
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
-      Get.offNamed(RouteNames.homePage);
-    });
+    _checkLogin();
+  }
+
+  Future<void> _checkLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("access_token");
+
+    await Future.delayed(Duration(seconds: 4));
+
+    if (token != null && token.isNotEmpty) {
+     Get.offNamed('/homePage');
+    } else {
+      Get.offNamed('/home');
+    }
   }
 
   @override
