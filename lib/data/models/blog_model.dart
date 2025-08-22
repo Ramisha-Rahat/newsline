@@ -4,8 +4,8 @@ class Blog {
   final String title;
   final String content;
   final String? coverImageUrl;
-  final String createdAt;
-  final String updatedAt;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   Blog({
     required this.id,
@@ -24,8 +24,8 @@ class Blog {
       title: json['title'],
       content: json['content'],
       coverImageUrl: json['cover_image_url'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
     );
   }
 }

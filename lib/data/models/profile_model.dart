@@ -15,14 +15,14 @@ class Profile {
     this.avatarUrl,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) {
+  factory Profile.fromJson(Map<String, dynamic> userJson, Map<String, dynamic>? profileJson) {
     return Profile(
-      id: json["id"],
-      username: json["username"],
-      email: json["email"],
-      bio: json["profile"]?["bio"],
-      location: json["profile"]?["location"],
-      avatarUrl: json["profile"]?["avatar_url"],
+      id: userJson["id"],
+      username: userJson["username"],
+      email: userJson["email"],
+      bio: profileJson?["bio"],
+      location: profileJson?["location"],
+      avatarUrl: profileJson?["avatar_url"],
     );
   }
 }

@@ -62,11 +62,12 @@ class ProfilePage extends StatelessWidget {
                     : const AssetImage('assets/images/test.jpg') as ImageProvider,
               ),
               const SizedBox(height: 16),
-              Text(profile.username, style: const TextStyle(fontSize: 20)),
+
+            Text(profile.username, style: const TextStyle(fontSize: 20)),
               Text(profile.email, style: const TextStyle(color: Colors.grey, fontSize: 12)),
               SizedBox(height: Responsive.height(1),),
-              if (profile.bio == null) Text(
-                "Flutter Developer-Traveler",
+               Text(
+                profile.bio?? "--",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: Responsive.fontSize(3.2),
@@ -103,7 +104,7 @@ class ProfilePage extends StatelessWidget {
               SizedBox(height: Responsive.screenHeight * 0.03),
 
               Obx(() {
-                if(controller.blog.isEmpty){
+                if(controller.blogs.isEmpty){
                   return Center(child: Text('No blog yet',style: TextStyle(fontSize: Responsive.fontSize(3)),),);
                 }
                 return GridView.builder(
@@ -115,9 +116,9 @@ class ProfilePage extends StatelessWidget {
                     mainAxisSpacing: 10,
                     childAspectRatio: 1,
                   ),
-                  itemCount: controller.blog.length,
+                  itemCount: controller.blogs.length,
                   itemBuilder: (context, index) {
-                    final blog = controller.blog[index];
+                    final blog = controller.blogs[index];
                     return Container(
                       decoration: BoxDecoration(
                         color: colorScheme.surfaceVariant,
